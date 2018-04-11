@@ -42,21 +42,23 @@ def addClient(nome, cod, path):
     file.close()
 
 
-def delClient(cliente, lb1):
-    # lb1.delete(0, END)
+def delClient(cliente, lb1, END):
+    lb1.delete(0, END)
     with open(clientList, 'r+') as file:
         content = file.readlines()
         file.seek(0)
         for line in content:
-            print(cliente.split(" - ")[1].replace("Cod:", ""))
-            print(line.split(";")[1])
             if (cliente.split(" - ")[1].replace("Cod:", "") != line.split(";")[1]):
                 file.write(line)
             else:
                 pass
         file.truncate()
         file.close()
-        win.update()
+    clients = readClients()
+    id = 0
+    for i in clients:
+        id += 1
+        lb1.insert(id, i.name + " - Cod:" + i.cod + " - " + i.path.strip())
 
 
 class user(object):

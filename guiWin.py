@@ -57,7 +57,7 @@ class ConfigFrame(Frame):
         b3 = Button(win, text="Mudar\nCliente", height=5, width=12)
         b3.grid(row=3, column=3)
         b4 = Button(win, text="Remover\nCliente", height=5,
-                    width=12, command=lambda: (delClient(lb1.get(lb1.curselection()[0]), lb1)))
+                    width=12, command=lambda: (delClient(lb1.get(lb1.curselection()[0]), lb1, END)))
         b4.grid(row=4, column=3)
 
         l2 = Label(win, text="Relatórios")
