@@ -78,7 +78,7 @@ def saveLog(appRunning, cliente, user, step):
 
     if (newFile == True):
         file.write(user.name + ";" + str(today.day) +
-                   ";" + appRunning.fileName + ";" + step/60 + "\n")
+                   ";" + appRunning.fileName + ";" + str(step/60) + "\n")
 
     file.truncate()
     print(appRunning.fileName + " - Salvo!!")
