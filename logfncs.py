@@ -1,6 +1,6 @@
 import os.path
 import datetime
-from classes import cliente, appWorking, user
+#from classes import cliente, appWorking, user
 
 
 def chkDupLog(cliente):
@@ -83,3 +83,17 @@ def saveLog(appRunning, cliente, user, step):
     file.truncate()
     print(appRunning.fileName + " - Salvo!!")
     file.close()
+
+
+def logPathChecker(path):
+    print('here')
+    if os.path.isdir(path+"logs/"):
+        print('if')
+        pass
+    else:
+        # os.makedirs(path+"logs/")
+        print('else')
+    return 0
+
+
+# logPathChecker("fsdfad")
