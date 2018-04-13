@@ -13,7 +13,6 @@ class changeUser(Frame):
 
     def initUI(self, win, labelUser, cfgSets):
 
-        self.master.title("Usuário")
         l1 = Label(win, text="Digite o nome do usuário:")
         l1.grid(row=0, column=0)
         t1 = Text(win, width=30, height=1)
@@ -26,6 +25,7 @@ class changeUser(Frame):
 
 def changeUserUI(labelUser, cfgSets):
     win = Tk()
+    win.title("Alterar Usuário")
     win.geometry("250x73")
     app = changeUser(win, labelUser, cfgSets)
     win.mainloop()
@@ -40,7 +40,6 @@ class addClientClass(Frame):
 
     def initUI(self, win, id, lbIn):
 
-        self.master.title("Adicionar Cliente")
         l1 = Label(win, text="Nome:")
         l1.grid(row=0, column=0)
         t1 = Text(win, width=30, height=1)
@@ -53,7 +52,7 @@ class addClientClass(Frame):
         l3.grid(row=2, column=0)
         t3 = Text(win, width=20, height=1)
         t3.grid(row=2, column=1)
-        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3))
+        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3, END))
         b2.grid(row=2, column=2)
         b1 = Button(win, width=20, text="Ok!",
                     command=lambda: addClient(win, t1.get('1.0', END).strip(), t2.get('1.0', END).strip(), t3.get('1.0', END).strip(), id, lbIn))
@@ -62,6 +61,7 @@ class addClientClass(Frame):
 
 def addClientUI(id, lbIn):
     win = Tk()
+    win.title("Adicionar cliente")
     # win.geometry("250x73")
     app = addClientClass(win, id, lbIn)
     win.mainloop()
@@ -80,7 +80,6 @@ class changeClientClass(Frame):
         cod = item.split(" - ")[1].replace("Cod:", "")
         path = item.split(" - ")[2]
 
-        self.master.title("Alterar Cliente")
         l1 = Label(win, text="Nome:")
         l1.grid(row=0, column=0)
         t1 = Text(win, width=30, height=1)
@@ -105,6 +104,7 @@ class changeClientClass(Frame):
 
 def changeClientUI(item, lbIn, END, id):
     win = Tk()
+    win.title("Alterar Cliente")
     # win.geometry("250x73")
     app = changeClientClass(win, item, lbIn, END, id)
     win.mainloop()
