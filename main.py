@@ -1,14 +1,17 @@
 import time
 from script import scriptUp
+from filesfncs import checkClientList, getConfigSets
+from classes import user
 
 
 def main():
-
-    step = 2
+    checkClientList()
     run = True
     while run:
-        scriptUp()
-        time.sleep(step)
+        cfgSets = getConfigSets()
+        userObj = user(cfgSets[0])
+        scriptUp(cfgSets, userObj)
+        time.sleep(int(cfgSets[1]))
 
 
 if __name__ == '__main__':

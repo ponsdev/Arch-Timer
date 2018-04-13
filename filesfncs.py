@@ -1,5 +1,15 @@
 import os
 from classes import cliente, appWorking
+from guiAlert import alertUI
+
+
+def checkClientList():
+    with open("cfg/clientList.txt") as file:
+        if (file.readline() != ""):
+            pass
+        else:
+            alertUI("Lista de clientes não configurada!\nConfigure antes de usar!")
+            quit()
 
 
 def searchFiles(cliente):
@@ -25,3 +35,11 @@ def fileChecker(appWorking, cliente):
             return True
     else:
         print(cliente.path + appWorking.fileName.strip() + " - Arquivo NÃO existe")
+
+
+def getConfigSets():
+    cfgSets = []
+    with open("cfg/config.txt") as file:
+        for line in file:
+            cfgSets.append(line.strip())
+    return cfgSets

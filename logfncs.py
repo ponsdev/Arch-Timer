@@ -49,7 +49,8 @@ def chkDupLog(cliente):
     input()
 
 
-def saveLog(appRunning, cliente, user, step):
+def saveLog(appRunning, cliente, user, cfgSets):
+    step = int(cfgSets[1])
     today = datetime.date.today()
     arqLog = "logs/"+user.name+"-timeLog-mes-" + str(today.month) + ".csv"
     try:
@@ -81,7 +82,7 @@ def saveLog(appRunning, cliente, user, step):
                    ";" + appRunning.fileName + ";" + str(step/60) + "\n")
 
     file.truncate()
-    print(appRunning.fileName + " - Salvo!!")
+    print(appRunning.fileName + " - Logged...")
     file.close()
 
 
