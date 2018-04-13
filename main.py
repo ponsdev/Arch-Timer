@@ -5,6 +5,9 @@ from classes import user
 
 
 def main():
+    print("--------------------------")
+    print("Arch-Timer 1.0 iniciado...")
+    print("--------------------------")
     checkClientList()
     run = True
     while run:

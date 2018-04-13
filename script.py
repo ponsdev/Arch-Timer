@@ -10,8 +10,8 @@ def scriptUp(cfgSets, user):
         title = get_fg_win().split(" - ")
         for i in title:
             if i.find(".rvt") != -1:
-                fileName = i.replace("]", "").replace("[", "").replace(
-                    "Não está respondendo", "").strip()
+                fileName = i.replace("[", "").replace("]", "").replace(
+                    "(", "").replace(")", "").replace("Não está respondendo", "").strip()
                 cliente = getClient(fileName)
                 if (cliente != None):
                     app = appWorking("revit", fileName)
