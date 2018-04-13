@@ -1,16 +1,17 @@
 from tkinter import *
 from tkinter import ttk
 from classes import *
+from guiDirPath import guiClientPath
 
 
 class changeUser(Frame):
 
-    def __init__(self, win, labelUser):
+    def __init__(self, win, labelUser, cfgSets):
         super().__init__()
         self.win = win
-        self.initUI(win, labelUser)
+        self.initUI(win, labelUser, cfgSets)
 
-    def initUI(self, win, labelUser):
+    def initUI(self, win, labelUser, cfgSets):
 
         self.master.title("Usuário")
         l1 = Label(win, text="Digite o nome do usuário:")
@@ -18,15 +19,15 @@ class changeUser(Frame):
         t1 = Text(win, width=30, height=1)
         t1.grid(row=1, column=0)
         b1 = Button(win, width=20, text="Ok!",
-                    command=lambda: setUser(win, labelUser, t1.get('1.0', END).strip()))
+                    command=lambda: setUser(win, labelUser, t1.get('1.0', END).strip(), cfgSets))
         b1.grid(row=2, column=0)
         t1.insert("1.0", getUser())
 
 
-def changeUserUI(labelUser):
+def changeUserUI(labelUser, cfgSets):
     win = Tk()
     win.geometry("250x73")
-    app = changeUser(win, labelUser)
+    app = changeUser(win, labelUser, cfgSets)
     win.mainloop()
 
 
@@ -42,19 +43,21 @@ class addClientClass(Frame):
         self.master.title("Adicionar Cliente")
         l1 = Label(win, text="Nome:")
         l1.grid(row=0, column=0)
-        t1 = Text(win, width=25, height=1)
-        t1.grid(row=0, column=1)
+        t1 = Text(win, width=30, height=1)
+        t1.grid(row=0, column=1, columnspan=2)
         l2 = Label(win, text="Código:")
         l2.grid(row=1, column=0)
-        t2 = Text(win, width=25, height=1)
-        t2.grid(row=1, column=1)
+        t2 = Text(win, width=30, height=1)
+        t2.grid(row=1, column=1, columnspan=2)
         l3 = Label(win, text="Caminho:")
         l3.grid(row=2, column=0)
-        t3 = Text(win, width=25, height=1)
+        t3 = Text(win, width=20, height=1)
         t3.grid(row=2, column=1)
+        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3))
+        b2.grid(row=2, column=2)
         b1 = Button(win, width=20, text="Ok!",
                     command=lambda: addClient(win, t1.get('1.0', END).strip(), t2.get('1.0', END).strip(), t3.get('1.0', END).strip(), id, lbIn))
-        b1.grid(row=3, column=0, columnspan=2)
+        b1.grid(row=3, column=0, columnspan=3)
 
 
 def addClientUI(id, lbIn):
@@ -80,22 +83,24 @@ class changeClientClass(Frame):
         self.master.title("Alterar Cliente")
         l1 = Label(win, text="Nome:")
         l1.grid(row=0, column=0)
-        t1 = Text(win, width=25, height=1)
-        t1.grid(row=0, column=1)
+        t1 = Text(win, width=30, height=1)
+        t1.grid(row=0, column=1, columnspan=2)
         t1.insert('1.0', name)
         l2 = Label(win, text="Código:")
         l2.grid(row=1, column=0)
-        t2 = Text(win, width=25, height=1)
-        t2.grid(row=1, column=1)
+        t2 = Text(win, width=30, height=1)
+        t2.grid(row=1, column=1, columnspan=2)
         t2.insert('1.0', cod)
         l3 = Label(win, text="Caminho:")
         l3.grid(row=2, column=0)
-        t3 = Text(win, width=25, height=1)
+        t3 = Text(win, width=20, height=1)
         t3.grid(row=2, column=1)
+        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3, path))
+        b2.grid(row=2, column=2)
         t3.insert('1.0', path)
         b1 = Button(win, width=20, text="Ok!",
                     command=lambda: changeClient(win, t1.get('1.0', END).strip(), t2.get('1.0', END).strip(), t3.get('1.0', END).strip(), lbIn, END, id, item))
-        b1.grid(row=3, column=0, columnspan=2)
+        b1.grid(row=3, column=0, columnspan=3)
 
 
 def changeClientUI(item, lbIn, END, id):

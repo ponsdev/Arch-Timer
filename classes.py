@@ -48,6 +48,7 @@ def addClient(win, name, cod, path, id, lbIn):
                 if line.split(";")[1] == cod:
                     oldClient = True
                     file.write(line)
+                    alertUI("Código já cadastrado!")
                     break
                 else:
                     file.write(line)
@@ -120,16 +121,17 @@ def getUser():
     return user
 
 
-def setUser(win, labelUser, user):
+def setUser(win, labelUser, user, cfgSets):
     with open(configList, "r+") as file:
         content = file.readlines()
         file.seek(0)
         i = 1
         for line in content:
             if i == 1:
-                file.write(user)
+                file.write(user + "\n")
             else:
                 file.write(line)
+            i+=1
         file.truncate()
         file.close()
     win.destroy()

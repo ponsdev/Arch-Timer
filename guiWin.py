@@ -3,18 +3,19 @@ from tkinter import ttk
 from classes import user, getUser, addClient, delClient, readClients
 import threading
 from guiChanges import changeUserUI, addClientUI, changeClientUI
+from filesfncs import getConfigSets
 
 #labelUser = "usuario"
 
 
 class ConfigFrame(Frame):
 
-    def __init__(self, win):
+    def __init__(self, win, cfgSets):
         super().__init__()
         self.win = win
-        self.initUI(win)
+        self.initUI(win, cfgSets)
 
-    def initUI(self, win):
+    def initUI(self, win, cfgSets):
 
         self.master.title("Arch-Timer 1.0")
 
@@ -26,7 +27,7 @@ class ConfigFrame(Frame):
         labelUser.set(getUser())
         l1.grid(row=1, column=0, columnspan=3)
         b1 = Button(win, text="Mudar usuário", width=12,
-                    command=lambda: changeUserUI(labelUser))
+                    command=lambda: changeUserUI(labelUser, cfgSets))
         b1.grid(row=1, column=3)
 
         lb1 = Listbox(win, width=45, height=16, activestyle='dotbox')
@@ -42,8 +43,7 @@ class ConfigFrame(Frame):
         b2 = Button(win, text="Adicionar\nCliente", height=5,
                     width=12, command=lambda: (addClientUI(id+1, lb1)))
         b2.grid(row=2, column=3)
-        b3 = Button(win, text="Mudar\nCliente", height=5, width=12, command=lambda: (
-            changeClientUI(lb1.get(lb1.curselection()[0]), lb1, END, lb1.curselection()[0])))
+        b3 = Button(win, text="Mudar\nCliente", height=5, width=12, command=lambda: (changeClientUI(lb1.get(lb1.curselection()[0]), lb1, END, lb1.curselection()[0])))
         b3.grid(row=3, column=3)
         b4 = Button(win, text="Remover\nCliente", height=5,
                     width=12, command=lambda: (delClient(lb1.get(lb1.curselection()[0]), lb1, END)))
@@ -61,11 +61,11 @@ class ConfigFrame(Frame):
         b8.grid(row=6, column=3)
 
 
-def callUI():
+def callUI(cfgSets):
     win = Tk()
     win.geometry("380x359")
-    app = ConfigFrame(win)
+    app = ConfigFrame(win, cfgSets)
     win.mainloop()
 
-
-callUI()
+cfgSets=getConfigSets()
+callUI(cfgSets)

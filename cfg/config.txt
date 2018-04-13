@@ -1,1 +1,3 @@
 vinicius
+30
+cfg/clientList.txt
