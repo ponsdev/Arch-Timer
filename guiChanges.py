@@ -95,7 +95,7 @@ class changeClientClass(Frame):
         l3.grid(row=2, column=0)
         t3 = Text(win, width=20, height=1)
         t3.grid(row=2, column=1)
-        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3, path))
+        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3, END, path))
         b2.grid(row=2, column=2)
         t3.insert('1.0', path)
         b1 = Button(win, width=20, text="Ok!",
