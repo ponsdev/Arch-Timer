@@ -30,6 +30,7 @@ def saveLog(appRunning, cliente, user, cfgSets):
                     newFile = False
     except:
         print('arquivo log criado')
+        file.write("usuario;dia;arquivo;tempo\n")
 
     if (newFile == True):
         file.write(user.name + ";" + str(today.day) +
@@ -41,13 +42,11 @@ def saveLog(appRunning, cliente, user, cfgSets):
 
 
 def logPathChecker(path):
-    print('here')
     if os.path.isdir(path+"logs/"):
-        print('if')
         pass
     else:
-        # os.makedirs(path+"logs/")
-        print('else')
+        os.makedirs(path+"logs/")
+        print("Pasta de logs criada!")
     return 0
 
 

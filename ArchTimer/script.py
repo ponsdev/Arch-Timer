@@ -13,6 +13,7 @@ def scriptUp(cfgSets, user):
                 fileName = i.replace("[", "").replace("]", "").replace(
                     "(", "").replace(")", "").replace("Não está respondendo", "").strip()
                 cliente = getClient(fileName)
+                # print(fileName)
                 if (cliente != None):
                     app = appWorking("revit", fileName)
                     saveLog(app, cliente, user, cfgSets)
