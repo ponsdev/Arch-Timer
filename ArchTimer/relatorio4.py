@@ -1,20 +1,18 @@
 import pandas
 import os
 import sys
+import webbrowser
 
 # filePath="vinicius-timeLog-mes-5.csv"
+templatePath = "template/template.html"
 
 
 def relArquivos(df):
+    global somaTotal
     df = df.set_index("arquivo")
-
-    # reg=filePath.split("/")[len(filePath.split("/"))-1]
-    # # reg=reg.split("\\")[len(reg.split("\\"))-1]
-    # user=reg.split("-")[0]
-    # month=reg.split("-")[3].replace(".csv","")
-
     filesListed = list(set(df.index))
-    somaTotal = 0
+    # somaTotal = 0
+    strHTML = ""
 
     for file in filesListed:
         soma = 0
@@ -27,10 +25,12 @@ def relArquivos(df):
                 # print(i)
                 soma += float(i)
             somaTotal += soma
-        print(file + " - "+str(soma))
+        print(file + " - "+str(round(soma/60, 2)).replace('.', ',')+" horas.")
+        strHTML += "<li class='item'>%s horas.</li>" % (
+            file + " - "+str(round(soma/60, 2)).replace('.', ','))
     # print("\n")
 
-    return somaTotal
+    return strHTML
 
 
 def getCSV(clientPath):
@@ -53,12 +53,23 @@ def catCSV(csvList):
     return catFile
 
 
+def updateHTML(strHTML, somaGeralTotal):
+    global clientPath
+    with open(templatePath, "r") as template:
+        with open(clientPath + "/logs/relatorio4.html", "wt") as html:
+            for line in template:
+                html.write(line.replace('{listaItens}', strHTML).replace(
+                    '{somaTotal}', str(somaGeralTotal).replace('.', ',')))
+
+
 # INICIO
 clientPath = sys.argv[1]
 csvList = getCSV(clientPath)
-print(csvList)
+# print(csvList)
+
 somaGeralTotal = 0
-userList = []
+somaTotal = 0
+
 # for file in csvList:
 #     reg=file.split("/")[len(file.split("/"))-1]
 #     user=reg.split("-")[0]
@@ -69,10 +80,15 @@ userList = []
 
 print("-------------------------------")
 print("RELATORIO GERAL ESCRITÓRIO!")
+
 catFile = catCSV(csvList)
-somaTotal = relArquivos(catFile)
-somaGeralTotal += somaTotal
+strHTML = relArquivos(catFile)
+somaGeralTotal += round(somaTotal/60, 2)
+updateHTML(strHTML, somaGeralTotal)
+
+webbrowser.open(
+    'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))
 
 print("-------------------------------")
-print("TEMPO TOTAL ESCRITÓRIO= %s minutos." % str(somaGeralTotal))
+print("TEMPO TOTAL ESCRITÓRIO= %s horas." % str(somaGeralTotal))
 print("-------------------------------")

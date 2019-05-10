@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        body {
+            font: 15px arial;
+        }
+
+        #container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center
+        }
+
+        .title {
+            text-align: center
+        }
+
+        .lista {
+            padding: 0;
+            list-style: none;
+        }
+    </style>
+    <title>RELATÓRIO GERAL ESCRITÓRIO</title>
+</head>
+
+<body>
+    <div id="container">
+        <h2 class="title">Relatório Escritório Geral</h2>
+        <ul class="lista">
+            {listaItens}
+        </ul>
+        <h3 class="totalGeral">TEMPO TOTAL ESCRITÓRIO= {somaTotal} horas.</h3>
+    </div>
+
+</body>
+
+</html>
