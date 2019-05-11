@@ -12,7 +12,9 @@ def relArquivos(df):
     df = df.set_index("arquivo")
     filesListed = list(set(df.index))
     # somaTotal = 0
-    strHTML = ""
+    strHTML = []
+    strFiles = ""
+    strTime = ""
 
     for file in filesListed:
         soma = 0
@@ -26,8 +28,12 @@ def relArquivos(df):
                 soma += float(i)
             somaTotal += soma
         print(file + " - "+str(round(soma/60, 2)).replace('.', ',')+" horas.")
-        strHTML += "<li class='item'>%s horas.</li>" % (
-            file + " - "+str(round(soma/60, 2)).replace('.', ','))
+        strFiles += "<li class='item'>%s</li>" % str(file)
+        strTime += "<li class='valor'>%s horas.</li>" % (
+            str(round(soma/60, 2)).replace('.', ','))
+
+    strHTML.append(strFiles)
+    strHTML.append(strTime)
     # print("\n")
 
     return strHTML
@@ -58,7 +64,7 @@ def updateHTML(strHTML, somaGeralTotal):
     with open(templatePath, "r") as template:
         with open(clientPath + "/logs/relatorio4.html", "wt") as html:
             for line in template:
-                html.write(line.replace('{listaItens}', strHTML).replace(
+                html.write(line.replace('{listFiles}', strHTML[0]).replace('{listTime}', strHTML[1]).replace(
                     '{somaTotal}', str(somaGeralTotal).replace('.', ',')))
 
 

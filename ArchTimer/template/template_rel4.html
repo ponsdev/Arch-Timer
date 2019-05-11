@@ -21,9 +21,27 @@
             text-align: center
         }
 
+        #tabela {
+            display: flex;
+            flex-direction: row;
+            width: 70%;
+            justify-content: center;
+            margin: 0 auto
+        }
+
         .lista {
             padding: 0;
             list-style: none;
+            flex: 1
+        }
+
+        .item {
+            flex: 1
+        }
+
+        .valor {
+            flex: 1;
+            text-align: right
         }
     </style>
     <title>RELATÓRIO GERAL ESCRITÓRIO</title>
@@ -32,9 +50,18 @@
 <body>
     <div id="container">
         <h2 class="title">Relatório Escritório Geral</h2>
+    </div>
+    <div id="tabela">
         <ul class="lista">
-            {listaItens}
+            <li class='item' style="text-align: center; color: rgb(70, 70, 70)">Arquivos</li>
+            {listFiles}
         </ul>
+        <ul class="lista">
+            <li class='valor' style="text-align: center; color: rgb(70, 70, 70)">Tempo</li>
+            {listTime}
+        </ul>
+    </div>
+    <div id="container">
         <h3 class="totalGeral">TEMPO TOTAL ESCRITÓRIO= {somaTotal} horas.</h3>
     </div>
 
