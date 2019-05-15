@@ -1,15 +1,13 @@
 import pandas
 import os
 
+monthName = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+             'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 templatePath = "template/template_html.html"
-templateTable = """<div class="title user" style="text-align: center" >{userName}
-</div><div id="tabela"><ul class="lista"><li class="item" style="background-color: rgb(199, 199, 199); font-weight: bold">Arquivos</li>{listFiles}</ul>
-<ul class="lista"><li class="valor" style="background-color: rgb(199, 199, 199);
-font-weight: bold">Tempo</li>{listTime}</ul></div>"""
+templateTable = """<div class="title user container">{userName}</div><div id="tabela"><ul class="lista"><li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Arquivos</li>{listFiles}<li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Total</li></ul><ul class="lista"><li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">Tempo</li>{listTime}<li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">{somaLocal}</li></ul></div>"""
 
 
-def relArquivos(df):
-    # global somaLocal
+def relArquivos(df, user=None, month=None):
     df = df.set_index("arquivo")
     filesListed = list(set(df.index))
     somaLocal = 0
@@ -28,11 +26,11 @@ def relArquivos(df):
                 # print(i)
                 soma += float(i)
             somaLocal += soma
-        print(file + " - "+str(round(soma/60, 2)).replace('.', ',')+" horas.")
+        print(file + " - "+str(round(soma/60, 2)).replace('.', ',')+" horas")
 
         strFiles += "<li class='item'>%s</li>" % str(file)
         strTime += "<li class='valor'>%s horas</li>" % (
-            str(round(soma/60, 2)).replace('.', ','))
+            str("{: .2f}".format(round(soma/60, 2)).replace('.', ',')))
 
     strHTML.append(strFiles)
     strHTML.append(strTime)
@@ -51,12 +49,16 @@ def getFiles(clientPath):
     return csvList
 
 
-def catCSV(csvList):
+def catCSV(csvList, user=None, month=None):
     fileList = []
     for file in csvList:
-        # reg=file.split("/")[len(file.split("/"))-1].split("-")[0]
-        df = pandas.read_csv(file, ";", index_col=None)
-        fileList.append(df)
+        regUser = file.split("/")[len(file.split("/"))-1].split("-")[0]
+        regMonth = file.split("/")[len(file.split("/")) -
+                                   1].split("-")[3].replace(".csv", "")
+        if ((user is None) or (str(regUser) == str(user))):
+            if (month is None) or (str(regMonth) == str(month)):
+                df = pandas.read_csv(file, ";", index_col=None)
+                fileList.append(df)
     catFile = pandas.concat(fileList, ignore_index=True)
     return catFile
 
@@ -72,14 +74,20 @@ def updateHTML(clientPath, insertHTML, clientName, somaGeralTotal):
                 html.write(line)
 
 
-def updateInsert(strHTML, user=None):
+def updateInsert(resultList, user=None, month=None):
     global templateTable
     newInsert = templateTable
-    newInsert = newInsert.replace('{listTime}', strHTML[1])
-    newInsert = newInsert.replace('{listFiles}', strHTML[0])
+    newInsert = newInsert.replace('{listFiles}', resultList[0])
+    newInsert = newInsert.replace('{listTime}', resultList[1])
+    newInsert = newInsert.replace(
+        '{somaLocal}', str("{: .2f}".format(round(resultList[2]/60, 2))).replace('.', ',')+" horas")
     if user is None:
-        newInsert = newInsert.replace(
-            '{userName}', "Uso de todos os usuários:")
+        if month is None:
+            newInsert = newInsert.replace(
+                '{userName}', "Uso de todos os usuarios:")
+        else:
+            newInsert = newInsert.replace(
+                '{userName}', monthName[int(month)-1])
     else:
-        newInsert = newInsert.replace('{userName}', "Usuário: "+user)
+        newInsert = newInsert.replace('{userName}', "Usuario: " + user)
     return newInsert

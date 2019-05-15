@@ -1,4 +1,3 @@
-import pandas
 import os
 import sys
 import webbrowser
@@ -14,6 +13,7 @@ csvList = rel.getFiles(clientPath)
 
 somaGeralTotal = 0
 insertHTML = ""
+userList = []
 
 print("-------------------------------")
 print("RELATORIO GERAL ESCRITÓRIO!")
