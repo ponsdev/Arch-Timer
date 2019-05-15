@@ -1,1 +1,5 @@
-.vscode/settings.json
+.vscode/
+Archtimer/__pycache__/
+Archtimer/modules/__pycache__/
+
+*.py[cod]
