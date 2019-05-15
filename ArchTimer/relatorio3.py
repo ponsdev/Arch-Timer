@@ -28,7 +28,7 @@ def relArquivos(df, user):
                 soma += float(i)
             somaTotal += soma
         print(file + " - "+str(soma))
-    # print("\n")
+
     print("TEMPO TOTAL GERAL %s = %s minutos." % (user, str(somaTotal)))
     print("-------------------------------")
 
@@ -57,25 +57,36 @@ def catCSV(csvList, user):
 
 
 # INICIO
+print()
 clientPath = sys.argv[1]
+clientName = sys.argv[2]
 csvList = getCSV(clientPath)
-print(csvList)
+
 somaGeralTotal = 0
+somaTotal = 0
 userList = []
+
+
 for file in csvList:
     reg = file.split("/")[len(file.split("/"))-1]
     user = reg.split("-")[0]
     month = reg.split("-")[3].replace(".csv", "")
     userList.append(user)
 userList = list(set(userList))
-print(userList)
 
 for user in userList:
+    print("-------------------------------")
     print("RELATORIO GERAL %s!" % user)
-    catFile = catCSV(csvList, user)
-    somaTotal = relArquivos(catFile, user)
-    somaGeralTotal += somaTotal
+    print("-------------------------------")
 
-# print("-------------------------------")
-# print("TEMPO TOTAL ESCRITÓRIO= %s minutos." % str(somaGeralTotal))
-# print("-------------------------------")
+    catFile = catCSV(csvList, user)
+    strHTML = relArquivos(catFile, user)
+
+    # somaTotal = relArquivos(catFile, user)
+    somaGeralTotal += round(somaTotal/60, 2)
+
+# REPLACES MARKER IN HTML WITH strHTML AND somaGeralTotal
+# updateHTML(strHTML, somaGeralTotal, clientName)
+
+# webbrowser.open(
+#     'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))
