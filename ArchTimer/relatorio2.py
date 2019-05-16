@@ -14,13 +14,15 @@ somaGeralTotal = 0
 insertHTML = ""
 monthList = []
 userList = []
-user = None
 
 for file in csvList:
     reg = file.split("/")[len(file.split("/"))-1]
     user = reg.split("-")[0]
     month = reg.split("-")[3].replace(".csv", "")
-    monthList.append(int(month))
+    if month in monthList:
+        break
+    else:
+        monthList.append(int(month))
 # monthList = list(set(monthList))
 monthList.sort()
 print(monthList)

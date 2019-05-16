@@ -4,7 +4,7 @@ import os
 monthName = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
              'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 templatePath = "template/template_html.html"
-templateTable = """<div class="title user container">{userName}</div><div id="tabela"><ul class="lista"><li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Arquivos</li>{listFiles}<li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Total</li></ul><ul class="lista"><li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">Tempo</li>{listTime}<li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">{somaLocal}</li></ul></div>"""
+templateTable = """<div class="container title user">{userName}</div><div id="tabela"><ul class="lista"><li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Arquivos</li>{listFiles}<li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Total</li></ul><ul class="lista"><li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">Tempo</li>{listTime}<li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">{somaLocal}</li></ul></div>"""
 
 
 def relArquivos(df, user=None, month=None):
@@ -64,7 +64,7 @@ def catCSV(csvList, user=None, month=None):
 
 
 def updateHTML(clientPath, insertHTML, clientName, somaGeralTotal):
-    somaGeralTotal = str(somaGeralTotal).replace('.', ',')
+    somaGeralTotal = str("{: .2f}".format(somaGeralTotal)).replace('.', ',')
     with open(templatePath, "r") as template:
         with open(clientPath + "/logs/relatorio4.html", "wt") as html:
             for line in template:
@@ -81,13 +81,16 @@ def updateInsert(resultList, user=None, month=None):
     newInsert = newInsert.replace('{listTime}', resultList[1])
     newInsert = newInsert.replace(
         '{somaLocal}', str("{: .2f}".format(round(resultList[2]/60, 2))).replace('.', ',')+" horas")
-    if user is None:
-        if month is None:
-            newInsert = newInsert.replace(
-                '{userName}', "Uso de todos os usuarios:")
-        else:
-            newInsert = newInsert.replace(
-                '{userName}', monthName[int(month)-1])
-    else:
+    if user is None and month is None:
+        newInsert = newInsert.replace(
+            '{userName}', "Uso de todos os usuarios:")
+    if user is None and month is not None:
+        newInsert = newInsert.replace(
+            '{userName}', monthName[int(month)-1])
+    if user is not None and month is None:
         newInsert = newInsert.replace('{userName}', "Usuario: " + user)
+    if user is not None and month is not None:
+        newInsert = newInsert.replace(
+            '{userName}', ("Mês: %s - Usuario: %s" %
+                           (monthName[int(month)-1], user)))
     return newInsert
