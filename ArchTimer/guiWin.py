@@ -54,16 +54,16 @@ class ConfigFrame(Frame):
         l2 = Label(win, text="Relatórios")
         l2.grid(row=5, column=0, columnspan=4)
         b5 = Button(win, text="Mensal por\nUsuário", width=16,
-                    command=(lambda: os.system("python relatorio1.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2])))
+                    command=(lambda: os.system("python relatorio1.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2]+" "+lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b5.grid(row=6, column=0)
         b6 = Button(win, text="Mensal por\narquivo", width=16,
-                    command=(lambda: os.system("python relatorio2.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2])))
+                    command=(lambda: os.system("python relatorio2.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2]+" "+lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b6.grid(row=6, column=1)
         b7 = Button(win, text="Total\nUsuário", width=16, command=(
-            lambda: os.system("python relatorio3.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2])))
+            lambda: os.system("python relatorio3.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2]+" "+lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b7.grid(row=6, column=2)
         b8 = Button(win, text="Total\nEscritorio", width=16, command=(
-            lambda: os.system("python relatorio4.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2])))
+            lambda: os.system("python relatorio4.py "+lb1.get(lb1.curselection()[0]).split(" - ")[2]+" "+lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b8.grid(row=6, column=3)
 
 

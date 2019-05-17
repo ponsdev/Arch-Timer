@@ -1,6 +1,6 @@
 import os.path
 import datetime
-#from classes import cliente, appWorking, user
+import time
 
 
 def saveLog(appRunning, cliente, user, cfgSets):
@@ -37,7 +37,8 @@ def saveLog(appRunning, cliente, user, cfgSets):
                    ";" + appRunning.fileName + ";" + str(step/60) + "\n")
 
     file.truncate()
-    print(appRunning.fileName + " - Logged...")
+    print(appRunning.fileName + " - Logged... - " +
+          time.strftime("%H:%M:%S, %d/%m/%Y", time.localtime()))
     file.close()
 
 
