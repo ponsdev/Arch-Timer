@@ -23,11 +23,7 @@ for file in csvList:
     userList.append(user)
     monthList.append(int(month))
 
-print(monthList)
-print(userList)
 monthList, userList = zip(*sorted(zip(monthList, userList)))
-print(monthList)
-print(userList)
 
 n = 0
 while (n < len(monthList)):

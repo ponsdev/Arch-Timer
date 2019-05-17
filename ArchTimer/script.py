@@ -1,8 +1,6 @@
-from classes import user, appWorking, getClient, getUser
+from classes import appWorking, getClient
 from logfncs import saveLog
 from winfcns import get_fg_win, get_idle_duration
-
-#user = user(getUser())
 
 
 def scriptUp(cfgSets, user):
@@ -16,7 +14,7 @@ def scriptUp(cfgSets, user):
                 fileName = fileName.replace("Not Responding", "").strip()
                 cliente = getClient(fileName)
                 # print(fileName)
-                if (cliente != None):
+                if (cliente is not None):
                     app = appWorking("revit", fileName)
                     saveLog(app, cliente, user, cfgSets)
                     break
@@ -25,35 +23,35 @@ def scriptUp(cfgSets, user):
                 fileName = fileName.replace("Não está respondendo", "").strip()
                 fileName = fileName.replace("Not Responding", "").strip()
                 cliente = getClient(fileName)
-                if (cliente != None):
+                if (cliente is not None):
                     app = appWorking("autocad", fileName)
                     saveLog(app, cliente, user, cfgSets)
                     break
             if i.find(".skp") != -1:
                 fileName = i
                 cliente = getClient(fileName)
-                if (cliente != None):
+                if (cliente is not None):
                     app = appWorking("sketchup", fileName)
                     saveLog(app, cliente, user, cfgSets)
                     break
             if (i.find(".doc") != -1 or i.find(".docx") != -1):
                 fileName = i
                 cliente = getClient(fileName)
-                if (cliente != None):
+                if (cliente is not None):
                     app = appWorking("word", fileName)
                     saveLog(app, cliente, user, cfgSets)
                     break
             if (i.find(".xls") != -1 or i.find(".xlsx") != -1):
                 fileName = i
                 cliente = getClient(fileName)
-                if (cliente != None):
+                if (cliente is not None):
                     app = appWorking("excel", fileName)
                     saveLog(app, cliente, user, cfgSets)
                     break
             if (i.find(".ppt") != -1 or i.find(".pptx") != -1):
                 fileName = i
                 cliente = getClient(fileName)
-                if (cliente != None):
+                if (cliente is not None):
                     app = appWorking("ppt", fileName)
                     saveLog(app, cliente, user, cfgSets)
                     break

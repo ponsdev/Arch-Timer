@@ -1,12 +1,10 @@
-from tkinter import *
-from tkinter import ttk
-from classes import user, getUser, addClient, delClient, readClients
-import threading
+from tkinter import Label, Button, END, StringVar, Listbox, Frame, Tk
+# from tkinter import ttk
+from classes import getUser, delClient, readClients
+# import threading
 from guiChanges import changeUserUI, addClientUI, changeClientUI
 from filesfncs import getConfigSets
 import os
-
-# labelUser = "usuario"
 
 
 class ConfigFrame(Frame):
@@ -70,7 +68,8 @@ class ConfigFrame(Frame):
 def callUI(cfgSets):
     win = Tk()
     win.geometry("505x372")
-    app = ConfigFrame(win, cfgSets)
+    # app = ConfigFrame(win, cfgSets)
+    ConfigFrame(win, cfgSets)
     win.mainloop()
 
 
