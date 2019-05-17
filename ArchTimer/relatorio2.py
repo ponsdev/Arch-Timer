@@ -1,81 +1,48 @@
-import pandas
 import os
 import sys
-
-# filePath="vinicius-timeLog-mes-5.csv"
-
-
-def relArquivos(df, month):
-    df = df.set_index("arquivo")
-
-    # reg=filePath.split("/")[len(filePath.split("/"))-1]
-    # # reg=reg.split("\\")[len(reg.split("\\"))-1]
-    # user=reg.split("-")[0]
-    # month=reg.split("-")[3].replace(".csv","")
-
-    filesListed = list(set(df.index))
-    somaTotal = 0
-
-    for file in filesListed:
-        soma = 0
-        if str(type(df.loc[file, "tempo"])) == "<class 'numpy.float64'>":
-            soma = df.loc[file, "tempo"]
-            somaTotal += soma
-        if type(df.loc[file, "tempo"]) is pandas.core.series.Series:
-            listaTempo = list(df.loc[file, "tempo"])
-            for i in listaTempo:
-                # print(i)
-                soma += float(i)
-            somaTotal += soma
-        print(file + " - "+str(soma))
-    # print("\n")
-    print("TEMPO TOTAL MÊS %s = %s minutos." % (month, str(somaTotal)))
-    print("-------------------------------")
-
-    return somaTotal
-
-
-def getCSV(clientPath):
-    ext = ".csv"
-    csvList = []
-    for root, dirs, files in os.walk(clientPath):
-        for file in files:
-            if file.endswith(ext):
-                csvList.append(os.path.join(root, file).replace("\\", "/"))
-    return csvList
-
-
-def catCSV(csvList, month):
-    fileList = []
-    for file in csvList:
-        reg = file.split("/")[len(file.split("/")) -
-                              1].split("-")[3].replace(".csv", "")
-        if (str(reg) == str(month)):
-            df = pandas.read_csv(file, ";", index_col=None)
-            fileList.append(df)
-    catFile = pandas.concat(fileList, ignore_index=True)
-    return catFile
+import webbrowser
+import modules.rel_gerador as rel
 
 
 # INICIO
+print()
 clientPath = sys.argv[1]
-csvList = getCSV(clientPath)
-print(csvList)
+clientName = sys.argv[2]
+csvList = rel.getFiles(clientPath)
+
 somaGeralTotal = 0
+insertHTML = ""
 monthList = []
+userList = []
+
 for file in csvList:
     reg = file.split("/")[len(file.split("/"))-1]
     user = reg.split("-")[0]
     month = reg.split("-")[3].replace(".csv", "")
-    monthList.append(str(month))
-monthList = list(set(monthList))
+    if month in monthList:
+        break
+    else:
+        monthList.append(int(month))
 
+monthList = sorted(set(monthList))
+print(monthList)
 for month in monthList:
+    print("-------------------------------")
     print("RELATORIO MÊS %s POR ARQUIVOS!" % month)
-    catFile = catCSV(csvList, month)
-    somaTotal = relArquivos(catFile, month)
-    somaGeralTotal += somaTotal
+    print("-------------------------------")
+    catFile = rel.catCSV(csvList, None, month)
+    resultList = rel.relArquivos(catFile, None, month)
+    somaGeralTotal += round(resultList[2]/60, 2)
+
+    insertHTML += rel.updateInsert(resultList, None, month)
 
 print("-------------------------------")
 print("TEMPO TOTAL ESCRITÓRIO= %s minutos." % str(somaGeralTotal))
 print("-------------------------------")
+
+# REPLACES MARKER IN HTML WITH strHTML AND somaGeralTotal
+rel.updateHTML(clientPath, insertHTML,
+               "RELATORIO MENSAL ESCRITÓRIO", clientName, somaGeralTotal)
+
+webbrowser.open(
+    'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))
