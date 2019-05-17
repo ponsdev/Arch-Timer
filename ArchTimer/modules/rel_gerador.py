@@ -63,14 +63,15 @@ def catCSV(csvList, user=None, month=None):
     return catFile
 
 
-def updateHTML(clientPath, insertHTML, clientName, somaGeralTotal):
+def updateHTML(clientPath, insertHTML, relType, clientName, somaGeralTotal):
     somaGeralTotal = str("{: .2f}".format(somaGeralTotal)).replace('.', ',')
     with open(templatePath, "r") as template:
         with open(clientPath + "/logs/relatorio4.html", "wt") as html:
             for line in template:
+                line = line.replace('{relType}', relType)
+                line = line.replace('{clientName}', clientName)
                 line = line.replace('{content}', insertHTML)
                 line = line.replace('{somaGeralTotal}', somaGeralTotal)
-                line = line.replace('{clientName}', clientName)
                 html.write(line)
 
 

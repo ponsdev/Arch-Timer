@@ -23,8 +23,8 @@ for file in csvList:
         break
     else:
         monthList.append(int(month))
-# monthList = list(set(monthList))
-monthList.sort()
+
+monthList = sorted(set(monthList))
 print(monthList)
 for month in monthList:
     print("-------------------------------")
@@ -41,7 +41,8 @@ print("TEMPO TOTAL ESCRITÓRIO= %s minutos." % str(somaGeralTotal))
 print("-------------------------------")
 
 # REPLACES MARKER IN HTML WITH strHTML AND somaGeralTotal
-rel.updateHTML(clientPath, insertHTML, clientName, somaGeralTotal)
+rel.updateHTML(clientPath, insertHTML,
+               "RELATORIO MENSAL ESCRITÓRIO", clientName, somaGeralTotal)
 
 webbrowser.open(
     'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))

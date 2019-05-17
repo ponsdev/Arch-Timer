@@ -33,7 +33,8 @@ for user in userList:
     insertHTML += rel.updateInsert(resultList, user)
 
 # REPLACES MARKER IN HTML WITH strHTML AND somaGeralTotal
-rel.updateHTML(clientPath, insertHTML, clientName, somaGeralTotal)
+rel.updateHTML(clientPath, insertHTML, "RELATORIO POR USUÁRIO",
+               clientName, somaGeralTotal)
 
 webbrowser.open(
     'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))

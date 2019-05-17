@@ -43,7 +43,8 @@ print("TEMPO TOTAL ESCRITÓRIO= %s minutos." % str(somaGeralTotal))
 print("-------------------------------")
 
 # REPLACES MARKER IN HTML WITH strHTML AND somaGeralTotal
-rel.updateHTML(clientPath, insertHTML, clientName, somaGeralTotal)
+rel.updateHTML(clientPath, insertHTML,
+               "RELATORIO MENSAL POR USUÁRIO", clientName, somaGeralTotal)
 
 webbrowser.open(
     'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))

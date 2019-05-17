@@ -25,7 +25,8 @@ somaGeralTotal += round(resultList[2]/60, 2)
 
 insertHTML += rel.updateInsert(resultList)
 # REPLACES MARKER IN HTML WITH strHTML AND somaGeralTotal
-rel.updateHTML(clientPath, insertHTML, clientName, somaGeralTotal)
+rel.updateHTML(clientPath, insertHTML, "RELATORIO GERAL",
+               clientName, somaGeralTotal)
 
 webbrowser.open(
     'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))
