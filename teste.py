@@ -26,6 +26,13 @@ collection = database['clients']
 
 data = {'Name': 'SM_Cristal'}
 
-collection.insert_one(data)
+
+def insert_data(data):
+    doc = collection.insert_one(data)
+    return doc.inserted_id
+
+
+id = insert_data(data)
+print(id)
 
 connection.close()
