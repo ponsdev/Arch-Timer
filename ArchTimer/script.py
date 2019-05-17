@@ -11,7 +11,9 @@ def scriptUp(cfgSets, user):
         for i in title:
             if i.find(".rvt") != -1:
                 fileName = i.replace("[", "").replace("]", "").replace(
-                    "(", "").replace(")", "").replace("Não está respondendo", "").strip()
+                    "(", "").replace(")", "")
+                fileName = fileName.replace("Não está respondendo", "").strip()
+                fileName = fileName.replace("Not Responding", "").strip()
                 cliente = getClient(fileName)
                 # print(fileName)
                 if (cliente != None):
@@ -20,6 +22,8 @@ def scriptUp(cfgSets, user):
                     break
             if i.find(".dwg") != -1:
                 fileName = i.replace("]", "").replace("[", "")
+                fileName = fileName.replace("Não está respondendo", "").strip()
+                fileName = fileName.replace("Not Responding", "").strip()
                 cliente = getClient(fileName)
                 if (cliente != None):
                     app = appWorking("autocad", fileName)

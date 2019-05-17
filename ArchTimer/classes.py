@@ -1,5 +1,5 @@
 import os
-from guiAlert import *
+from guiAlert import alertUI
 from logfncs import logPathChecker
 
 clientList = "cfg/clientList.txt"
@@ -18,7 +18,10 @@ def getClient(fileName):
     client = None
     with open(clientList, 'r') as file:
         for line in file:
-            if line.split(";")[1] == fileName.split("_")[0]:
+            # if line.split(";")[1] == fileName.split("_")[0]:
+            #     client = cliente(line.split(";")[0], line.split(";")[
+            #                      1], line.split(";")[2])
+            if fileName.find(line.split(";")[1]) != -1:
                 client = cliente(line.split(";")[0], line.split(";")[
                                  1], line.split(";")[2])
             else:
@@ -52,7 +55,7 @@ def addClient(win, name, cod, path, id, lbIn):
                     break
                 else:
                     file.write(line)
-            if oldClient == False:
+            if oldClient is False:
                 file.write(name + ";" + cod + ";" + path + "\n")
             file.truncate()
             file.close()
@@ -68,7 +71,8 @@ def delClient(item, lb1, END):
         content = file.readlines()
         file.seek(0)
         for line in content:
-            if (item.split(" - ")[1].replace("Cod:", "") != line.split(";")[1]):
+            clienteID = line.split(";")[1]
+            if (item.split(" - ")[1].replace("Cod:", "") != clienteID):
                 file.write(line)
             else:
                 pass
@@ -97,7 +101,7 @@ def changeClient(win, name, cod, path, lbIn, END, id, item):
                     break
                 else:
                     file.write(line)
-            if oldClient == False:
+            if oldClient is False:
                 file.write(name + ";" + cod + ";" + path + "\n")
             file.truncate()
             file.close()
@@ -131,7 +135,7 @@ def setUser(win, labelUser, user, cfgSets):
                 file.write(user + "\n")
             else:
                 file.write(line)
-            i+=1
+            i += 1
         file.truncate()
         file.close()
     win.destroy()
