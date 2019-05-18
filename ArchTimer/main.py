@@ -1,14 +1,17 @@
 import time
 from script import scriptUp
-from filesfncs import checkClientList, getConfigSets
+from models.filesfncs import checkClientList, getConfigSets
 from classes import user
+from guiAlert import alertUI
 
 
 def main():
     print("--------------------------")
     print("Arch-Timer 1.0 iniciado...")
     print("--------------------------")
-    checkClientList()
+    if checkClientList() is not True:
+        alertUI("Lista de clientes não configurada!\nConfigure antes de usar!")
+        quit()
     run = True
     while run:
         cfgSets = getConfigSets()

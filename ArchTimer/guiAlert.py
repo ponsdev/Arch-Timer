@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import Frame, Label, Button, Tk
 
 
 class alertClass(Frame):
@@ -10,7 +10,7 @@ class alertClass(Frame):
 
     def initUI(self, winAlert, alertText):
         winAlert.title("ATENÇÃO!!!")
-        alertTextl1 = StringVar()
+        # alertTextl1 = StringVar()
         l1 = Label(winAlert, text=alertText)
         # alertTextl1.set(texto)
         l1.pack()
@@ -22,7 +22,7 @@ class alertClass(Frame):
 def alertUI(alertText="Erro!"):
     winAlert = Tk()
     winAlert.geometry("250x55")
-    app = alertClass(winAlert, alertText)
+    alertClass(winAlert, alertText)
     winAlert.mainloop()
 
 

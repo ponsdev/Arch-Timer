@@ -48,7 +48,7 @@ def relatorio1(clientPath, clientName):
     webbrowser.open(
         'file://' + os.path.realpath(clientPath + "/logs/relatorio.html"))
 
-    return somaGeralTotal
+    # return somaGeralTotal
 
 
 def relatorio2(clientPath, clientName):
@@ -90,7 +90,7 @@ def relatorio2(clientPath, clientName):
     webbrowser.open(
         'file://' + os.path.realpath(clientPath + "/logs/relatorio.html"))
 
-    return somaGeralTotal
+    # return somaGeralTotal
 
 
 def relatorio3(clientPath, clientName):
@@ -132,7 +132,8 @@ def relatorio3(clientPath, clientName):
     print("-------------------------------")
     print("TEMPO TOTAL ESCRITÓRIO= %s horas." % str(somaGeralTotal))
     print("-------------------------------")
-    return somaGeralTotal
+
+    # return somaGeralTotal
 
 
 def relatorio4(clientPath, clientName):
@@ -159,6 +160,7 @@ def relatorio4(clientPath, clientName):
     print("-------------------------------")
     print("TEMPO TOTAL ESCRITÓRIO= %s horas." % str(somaGeralTotal))
     print("-------------------------------")
-    return somaGeralTotal
+
+    # return str(somaGeralTotal)
 
 # relatorio1("/home/vinicius/Dropbox/logs", "SM_Cristal")

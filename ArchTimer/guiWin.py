@@ -1,11 +1,11 @@
 from tkinter import Label, Button, END, StringVar, Listbox, Frame, Tk
-# from tkinter import ttk
 from classes import getUser, delClient, readClients
-# import threading
 from guiChanges import changeUserUI, addClientUI, changeClientUI
-from filesfncs import getConfigSets
-import os
+from models.filesfncs import getConfigSets
 from view.rel_generator import relatorio1, relatorio2, relatorio3, relatorio4
+# from tkinter import ttk
+# import threading
+# import os
 
 
 class ConfigFrame(Frame):
@@ -56,16 +56,16 @@ class ConfigFrame(Frame):
         l2 = Label(win, text="Relatórios")
         l2.grid(row=5, column=0, columnspan=4)
         b5 = Button(win, text="Mensal por\nUsuário", width=16,
-                    command=(lambda: os.system(relatorio1(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0]))))
+                    command=(lambda: relatorio1(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b5.grid(row=6, column=0)
         b6 = Button(win, text="Mensal por\narquivo", width=16,
-                    command=(lambda: os.system(relatorio2(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0]))))
+                    command=(lambda: relatorio2(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b6.grid(row=6, column=1)
         b7 = Button(win, text="Total\nUsuário", width=16, command=(
-            lambda: os.system(relatorio3(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0]))))
+            lambda: relatorio3(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b7.grid(row=6, column=2)
         b8 = Button(win, text="Total\nEscritorio", width=16, command=(
-            lambda: os.system(relatorio4(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0]))))
+            lambda: relatorio4(lb1.get(lb1.curselection()[0]).split(" - ")[2], lb1.get(lb1.curselection()[0]).split(" - ")[0])))
         b8.grid(row=6, column=3)
 
 

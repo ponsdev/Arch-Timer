@@ -1,15 +1,13 @@
-import os
-from classes import cliente, appWorking
-from guiAlert import alertUI
+# import os
+# from classes import cliente, appWorking
 
 
 def checkClientList():
     with open("cfg/clientList.txt") as file:
         if (file.readline() != ""):
-            pass
+            return True
         else:
-            alertUI("Lista de clientes não configurada!\nConfigure antes de usar!")
-            quit()
+            return False
 
 
 def getConfigSets():

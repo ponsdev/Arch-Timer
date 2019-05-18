@@ -1,6 +1,6 @@
 from classes import appWorking, getClient
-from logfncs import saveLog
-from winfcns import get_fg_win, get_idle_duration
+from models.logfncs import saveLog
+from models.winfcns import get_fg_win, get_idle_duration
 
 
 def scriptUp(cfgSets, user):

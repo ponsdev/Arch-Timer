@@ -1,6 +1,6 @@
 import os
 from guiAlert import alertUI
-from logfncs import logPathChecker
+from models.logfncs import logPathChecker
 
 clientList = "cfg/clientList.txt"
 configList = "cfg/config.txt"
