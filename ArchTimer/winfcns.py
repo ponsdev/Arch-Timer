@@ -1,5 +1,5 @@
-import time
-import win32api
+# import time
+# import win32api
 from ctypes import Structure, windll, c_uint, sizeof, byref
 from win32gui import GetWindowText, GetForegroundWindow
 

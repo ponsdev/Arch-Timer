@@ -1,7 +1,7 @@
 import os
 import sys
 import webbrowser
-import modules.rel_gerador as rel
+import view.rel_funcs as rel
 
 
 # INICIO
@@ -43,4 +43,4 @@ rel.updateHTML(clientPath, insertHTML,
                "RELATORIO MENSAL POR USUÁRIO", clientName, somaGeralTotal)
 
 webbrowser.open(
-    'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))
+    'file://' + os.path.realpath(clientPath + "/logs/relatorio.html"))

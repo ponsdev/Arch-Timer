@@ -3,7 +3,7 @@ import os
 
 monthName = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
              'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
-templatePath = "template/template_html.html"
+templatePath = "../template/template_html.html"
 templateTable = """<div class="container title user">{userName}</div><div id="tabela"><ul class="lista"><li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Arquivos</li>{listFiles}<li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Total</li></ul><ul class="lista"><li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">Tempo</li>{listTime}<li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">{somaLocal}</li></ul></div>"""
 
 
@@ -66,7 +66,7 @@ def catCSV(csvList, user=None, month=None):
 def updateHTML(clientPath, insertHTML, relType, clientName, somaGeralTotal):
     somaGeralTotal = str("{: .2f}".format(somaGeralTotal)).replace('.', ',')
     with open(templatePath, "r") as template:
-        with open(clientPath + "/logs/relatorio4.html", "wt") as html:
+        with open(clientPath + "/logs/relatorio.html", "wt") as html:
             for line in template:
                 line = line.replace('{relType}', relType)
                 line = line.replace('{clientName}', clientName)

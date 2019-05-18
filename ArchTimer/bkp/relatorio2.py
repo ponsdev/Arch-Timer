@@ -1,19 +1,19 @@
 import os
 import sys
 import webbrowser
-import modules.rel_gerador as rel
+import view.rel_funcs as rel
 
 
 # INICIO
 print()
 clientPath = sys.argv[1]
 clientName = sys.argv[2]
-csvList = rel.getFiles(clientPath)
-
 somaGeralTotal = 0
 insertHTML = ""
 monthList = []
 userList = []
+
+csvList = rel.getFiles(clientPath)
 
 for file in csvList:
     reg = file.split("/")[len(file.split("/"))-1]
@@ -45,4 +45,4 @@ rel.updateHTML(clientPath, insertHTML,
                "RELATORIO MENSAL ESCRITÓRIO", clientName, somaGeralTotal)
 
 webbrowser.open(
-    'file://' + os.path.realpath(clientPath + "/logs/relatorio4.html"))
+    'file://' + os.path.realpath(clientPath + "/logs/relatorio.html"))
