@@ -1,6 +1,6 @@
 from tkinter import Label, Button, END, StringVar, Listbox, Frame, Tk
-from classes import getUser, delClient, readClients
 from guiChanges import changeUserUI, addClientUI, changeClientUI
+from models.classes import getUser, delClient, readClients
 from models.filesfncs import getConfigSets
 from view.rel_generator import relatorio1, relatorio2, relatorio3, relatorio4
 # from tkinter import ttk

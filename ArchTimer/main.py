@@ -1,7 +1,7 @@
 import time
 from script import scriptUp
 from models.filesfncs import checkClientList, getConfigSets
-from classes import user
+from models.classes import user
 from guiAlert import alertUI
 
 

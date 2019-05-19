@@ -1,7 +1,7 @@
-from tkinter import *
-from tkinter import ttk
-from classes import *
+from tkinter import Label, Button, Text, Tk, END, Frame
+# from tkinter import ttk
 from guiDirPath import guiClientPath
+from models.classes import addClient, changeClient, getUser, setUser
 
 
 class changeUser(Frame):
@@ -52,7 +52,8 @@ class addClientClass(Frame):
         l3.grid(row=2, column=0)
         t3 = Text(win, width=20, height=1)
         t3.grid(row=2, column=1)
-        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3, END))
+        b2 = Button(win, width=8, height=1, text="Pasta",
+                    command=lambda: guiClientPath(t3, END))
         b2.grid(row=2, column=2)
         b1 = Button(win, width=20, text="Ok!",
                     command=lambda: addClient(win, t1.get('1.0', END).strip(), t2.get('1.0', END).strip(), t3.get('1.0', END).strip(), id, lbIn))
@@ -94,7 +95,8 @@ class changeClientClass(Frame):
         l3.grid(row=2, column=0)
         t3 = Text(win, width=20, height=1)
         t3.grid(row=2, column=1)
-        b2 = Button(win, width=8, height=1, text="Pasta", command=lambda: guiClientPath(t3, END, path))
+        b2 = Button(win, width=8, height=1, text="Pasta",
+                    command=lambda: guiClientPath(t3, END, path))
         b2.grid(row=2, column=2)
         t3.insert('1.0', path)
         b1 = Button(win, width=20, text="Ok!",
