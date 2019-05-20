@@ -1,11 +1,8 @@
 from tkinter import Label, Button, END, StringVar, Listbox, Frame, Tk
-from view.guiChanges import changeUserUI, addClientUI, changeClientUI
+from views.guiChanges import changeUserUI, addClientUI, changeClientUI
+from views.rel_generator import relatorio1, relatorio2, relatorio3, relatorio4
 from models.classes import getUser, delClient, readClients
 from models.filesfncs import getConfigSets
-from view.rel_generator import relatorio1, relatorio2, relatorio3, relatorio4
-# from tkinter import ttk
-# import threading
-# import os
 
 
 class ConfigFrame(Frame):

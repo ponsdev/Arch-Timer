@@ -4,7 +4,7 @@ import os
 monthName = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
              'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 templatePath = os.getcwd().replace("\\", "/") + \
-    "/view/template/template_html.html"
+    "/views/template/template_html.html"
 templateTable = """<div class="container title user">{userName}</div><div id="tabela"><ul class="lista"><li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Arquivos</li>{listFiles}<li class="item" style="background-color: rgb(230, 230, 230); font-weight: bold">Total</li></ul><ul class="lista"><li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">Tempo</li>{listTime}<li lass="valor" style="background-color: rgb(230, 230, 230); font-weight: bold; text-align: right">{somaLocal}</li></ul></div>"""
 
 

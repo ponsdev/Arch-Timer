@@ -1,7 +1,7 @@
 import os
 # import sys
 import webbrowser
-import view.rel_funcs as rel
+import views.rel_funcs as rel
 
 print()
 somaGeralTotal = 0

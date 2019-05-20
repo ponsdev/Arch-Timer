@@ -2,7 +2,7 @@ import time
 from scripts.script import scriptUp
 from models.filesfncs import checkClientList, getConfigSets
 from models.classes import user
-from view.guiAlert import alertUI
+from views.guiAlert import alertUI
 
 
 def main():
