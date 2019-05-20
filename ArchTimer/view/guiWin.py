@@ -1,5 +1,5 @@
 from tkinter import Label, Button, END, StringVar, Listbox, Frame, Tk
-from guiChanges import changeUserUI, addClientUI, changeClientUI
+from view.guiChanges import changeUserUI, addClientUI, changeClientUI
 from models.classes import getUser, delClient, readClients
 from models.filesfncs import getConfigSets
 from view.rel_generator import relatorio1, relatorio2, relatorio3, relatorio4
@@ -75,7 +75,3 @@ def callUI(cfgSets):
     # app = ConfigFrame(win, cfgSets)
     ConfigFrame(win, cfgSets)
     win.mainloop()
-
-
-cfgSets = getConfigSets()
-callUI(cfgSets)

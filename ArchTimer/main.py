@@ -1,8 +1,8 @@
 import time
-from script import scriptUp
+from scripts.script import scriptUp
 from models.filesfncs import checkClientList, getConfigSets
 from models.classes import user
-from guiAlert import alertUI
+from view.guiAlert import alertUI
 
 
 def main():

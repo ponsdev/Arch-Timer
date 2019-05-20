@@ -1,6 +1,5 @@
 from tkinter import Label, Button, Text, Tk, END, Frame
-# from tkinter import ttk
-from guiDirPath import guiClientPath
+from view.guiDirPath import guiClientPath
 from models.classes import addClient, changeClient, getUser, setUser
 
 

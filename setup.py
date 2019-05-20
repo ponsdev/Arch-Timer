@@ -34,7 +34,7 @@ def main():
     # cria links desktop
     makelnks("Archtimer 1.0", "\\Archtimer\\", "main.py", "cfg\\iconeT.ico")
     makelnks("Archtimer - Config", "\\Archtimer\\",
-             "guiWin.py", "cfg\\iconeC.ico")
+             "main_cfg.py", "cfg\\iconeC.ico")
     makelnks("Archtimer - Pastas", "\\change_dir_files\\",
              "main.py", "iconeDir.ico")
 
