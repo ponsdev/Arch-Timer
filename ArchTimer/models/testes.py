@@ -23,6 +23,6 @@ if __name__ == '__main__':
 # connDB.updateNameDBCliente(db, 19003, 19001)
 # connDB.delDBCliente(db, 19001)
 
-connDB.addLog(db, 19001, '19001_teste.dwg', 10)
+connDB.addLog(db, 19001, '19001_teste.dwg', 10, 'vinicius')
 
 db.closeDB()
