@@ -1,38 +1,37 @@
-# postgresql
-# import psycopg2
+import random
+import collections
 
-# con = psycopg2.connect(
-#     host="localhost",
-#     database="nomeDB",
-#     user="user",
-#     password="password")
-
-# cur = con.cursor()
-
-# cur.execute("select id, name from employees")
-
-# rows = cur.fetchall()
-# for r in rows:
-#     print(f"id {r[0]} name {r[1]}")
-
-# con.close()
-
-# mongoDB
-import pymongo
-
-connection = pymongo.MongoClient('localhost', 27017)
-database = connection['archtimer']
-collection = database['clients']
-
-data = {'Name': 'SM_Cristal'}
+inc = 5
+app = ['acad', 'revit', 'skt', 'word', 'excel', 'ppt']
 
 
-def insert_data(data):
-    doc = collection.insert_one(data)
-    return doc.inserted_id
+def check():
+    time = 0
+    lista = []
+    print(time)
+
+    def count(inc, app, user):
+        nonlocal time, lista
+        time = time+inc
+        lista.append(app)
+        print(f'{time}')
+        print(lista)
+        # zerar
+        if time == 300:
+
+            col = collections.Counter(lista)
+            print(col)
+            print(col.most_common(1))
+            for i in col:
+                print(f'{i} - {col[i]}')
+
+            time = 0
+            lista = []
+    return count
 
 
-id = insert_data(data)
-print(id)
-
-connection.close()
+vis = check()
+i = 0
+while i < 301:
+    vis(inc, random.choice(app), 'vinicius')
+    i = i+1
