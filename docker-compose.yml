@@ -1,0 +1,26 @@
+version: "3.5"
+services:
+  postgres:
+    image: postgres:alpine
+    volumes:
+      - /home/vinicius/code/dataDB:/var/lib/postgresql/data:z
+    ports:
+      - 5432:5432
+    networks:
+      - postgres-network
+    environment:
+      POSTGRES_PASSWORD: admin
+  pgadmin4:
+    image: dpage/pgadmin4
+    ports:
+      - 5050:80
+    networks:
+      - postgres-network
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin
+      PGADMIN_DEFAULT_PASSWORD: admin
+
+networks:
+  postgres-network:
+    external: false
+    name: postgres-network
