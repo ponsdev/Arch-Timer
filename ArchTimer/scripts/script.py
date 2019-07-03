@@ -3,68 +3,61 @@ from models.logfncs import saveLog
 from models.winfcns import get_fg_win, get_idle_duration
 
 
+def cleanFN(title):
+    filename = title.strip()
+    filename = filename.replace("[", "").replace("]", "")
+    filename = filename.replace("(", "").replace(")", "")
+    filename = filename.replace("Não está respondendo", "").strip()
+    filename = filename.replace("Not Responding", "").strip()
+    return filename
+
+
 def scriptUp(cfgSets, user):
     if (get_idle_duration() <= 300):
         title = get_fg_win().split(" - ")
         for i in title:
             if i.find(".rvt") != -1:
-                fileName = i.replace("[", "").replace("]", "").replace(
-                    "(", "").replace(")", "")
-                fileName = fileName.replace("Não está respondendo", "").strip()
-                fileName = fileName.replace("Not Responding", "").strip()
-                cliente = getClient(fileName)
-                # print(fileName)
+                filename = cleanFN(i)
+                cliente = getClient(filename)
                 if (cliente is not None):
-                    app = appWorking("revit", fileName)
+                    app = appWorking("revit", filename)
                     saveLog(app, cliente, user, cfgSets)
                     break
-            if i.find(".dwg") != -1:
-                fileName = i.replace("]", "").replace("[", "")
-                fileName = fileName.replace("Não está respondendo", "").strip()
-                fileName = fileName.replace("Not Responding", "").strip()
-                cliente = getClient(fileName)
+            elif i.find(".dwg") != -1:
+                filename = cleanFN(i)
+                cliente = getClient(filename)
                 if (cliente is not None):
-                    app = appWorking("autocad", fileName)
+                    app = appWorking("autocad", filename)
                     saveLog(app, cliente, user, cfgSets)
                     break
-            if i.find(".skp") != -1:
-                fileName = i
-                cliente = getClient(fileName)
+            elif i.find(".skp") != -1:
+                filename = cleanFN(i)
+                cliente = getClient(filename)
                 if (cliente is not None):
-                    app = appWorking("sketchup", fileName)
+                    app = appWorking("sketchup", filename)
                     saveLog(app, cliente, user, cfgSets)
                     break
-            if (i.find(".doc") != -1 or i.find(".docx") != -1):
-                fileName = i
-                cliente = getClient(fileName)
+            elif (i.find(".doc") != -1 or i.find(".docx") != -1):
+                filename = cleanFN(i)
+                cliente = getClient(filename)
                 if (cliente is not None):
-                    app = appWorking("word", fileName)
+                    app = appWorking("word", filename)
                     saveLog(app, cliente, user, cfgSets)
                     break
-            if (i.find(".xls") != -1 or i.find(".xlsx") != -1):
-                fileName = i
-                cliente = getClient(fileName)
+            elif (i.find(".xls") != -1 or i.find(".xlsx") != -1):
+                filename = cleanFN(i)
+                cliente = getClient(filename)
                 if (cliente is not None):
-                    app = appWorking("excel", fileName)
+                    app = appWorking("excel", filename)
                     saveLog(app, cliente, user, cfgSets)
                     break
-            if (i.find(".ppt") != -1 or i.find(".pptx") != -1):
-                fileName = i
-                cliente = getClient(fileName)
+            elif (i.find(".ppt") != -1 or i.find(".pptx") != -1):
+                filename = cleanFN(i)
+                cliente = getClient(filename)
                 if (cliente is not None):
-                    app = appWorking("ppt", fileName)
+                    app = appWorking("ppt", filename)
                     saveLog(app, cliente, user, cfgSets)
                     break
-
-    # fileList = searchFiles(cliente)
-    # for file in fileList:
-    #     if fileChecker(file, cliente):
-    #         openedFiles.append(file)
-    # print("Arquivos em USO: " + str(openedFiles))
-    # saveLog(openedFiles, cliente)
 
     else:
         pass
-
-    # time.sleep(cfgSets[1])
-    # chkDupLog(cliente)
