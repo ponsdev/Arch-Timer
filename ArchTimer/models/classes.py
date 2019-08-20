@@ -144,6 +144,7 @@ def setUser(win, labelUser, user, cfgSets):
 
 class appWorking(object):
 
-    def __init__(self, app, fileName):
+    def __init__(self, app, fileName, cliente):
         self.app = app
         self.fileName = fileName
+        self.cliente = cliente

@@ -3,14 +3,14 @@ import datetime
 import time
 
 
-def saveLog(appRunning, user, cfgSets, timeWorked):
-    # step = int(cfgSets[1])
+def saveLog(appRunning, cliente, user, cfgSets):
+    step = int(cfgSets[1])
     today = datetime.date.today()
     arqLog = "logs/"+user.name+"-timeLog-mes-" + str(today.month) + ".csv"
     try:
-        file = open(appRunning.cliente.path.strip() + arqLog, mode="r+")
+        file = open(cliente.path.strip() + arqLog, mode="r+")
     except IOError:
-        file = open(appRunning.cliente.path.strip() + arqLog, mode="w")
+        file = open(cliente.path.strip() + arqLog, mode="w")
 
     newFile = True
     try:
@@ -24,7 +24,7 @@ def saveLog(appRunning, user, cfgSets, timeWorked):
                 if (appRunning.fileName != line.split(";")[2]):
                     file.write(line)
                 else:
-                    tempo = float(line.split(";")[3]) + timeWorked/60
+                    tempo = float(line.split(";")[3]) + step/60
                     file.write(user.name + ";" + str(today.day) +
                                ";" + appRunning.fileName + ";" + str(tempo) + "\n")
                     newFile = False
@@ -32,9 +32,9 @@ def saveLog(appRunning, user, cfgSets, timeWorked):
         print('arquivo log criado')
         file.write("usuario;dia;arquivo;tempo\n")
 
-    if (newFile is True):
+    if (newFile == True):
         file.write(user.name + ";" + str(today.day) +
-                   ";" + appRunning.fileName + ";" + str(timeWorked/60) + "\n")
+                   ";" + appRunning.fileName + ";" + str(step/60) + "\n")
 
     file.truncate()
     print(appRunning.fileName + " - Logged... - " +
