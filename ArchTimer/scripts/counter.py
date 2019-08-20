@@ -48,8 +48,8 @@ def check(user):
                     tempo_considerado += round(uteis[i]*inc, 2)
 
             print(tempo_considerado)
-
             print('----------------------')
+
             time = 0
             lista = []
     return count

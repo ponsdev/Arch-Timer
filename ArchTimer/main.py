@@ -15,12 +15,12 @@ def main():
         quit()
     cfgSets = getConfigSets()
     userObj = user(cfgSets[0])
-    CHECKER = check(userObj)
+    checker = check(userObj)
 
     run = True
     while run:
         time.sleep(int(cfgSets[1]))
-        scriptUp(cfgSets, userObj, CHECKER)
+        scriptUp(cfgSets, userObj, checker)
 
 
 if __name__ == '__main__':
